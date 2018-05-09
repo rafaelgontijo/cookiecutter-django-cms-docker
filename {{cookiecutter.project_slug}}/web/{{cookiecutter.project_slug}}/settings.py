@@ -44,13 +44,13 @@ ROOT_URLCONF = '{{cookiecutter.project_slug}}.urls'
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = {{ cookiecutter.timezone }}
 
-USE_I18N = False
+USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
 USE_TZ = True
 
@@ -127,43 +127,30 @@ INSTALLED_APPS = (
     'djangocms_text_ckeditor',
     'filer',
     'easy_thumbnails',
-    'djangocms_column',
     'djangocms_link',
     'cmsplugin_filer_file',
     'cmsplugin_filer_folder',
     'cmsplugin_filer_image',
     'cmsplugin_filer_utils',
-    'djangocms_style',
-    'djangocms_snippet',
     'djangocms_googlemap',
     'djangocms_video',
-    # aldryn news blog
-    'aldryn_apphooks_config',
-    'aldryn_categories',
-    'aldryn_common',
-    'aldryn_newsblog',
-    'aldryn_people',
-    'aldryn_reversion',
-    'aldryn_translation_tools',
-    'parler',
-    'sortedm2m',
-    'taggit',
-    'reversion',
+    'djangocms_picture',
+    'djangocms_file',
     # Custom apps
     '{{cookiecutter.project_slug}}'
 )
 
 LANGUAGES = (
     ## Customize this
-    ('en', gettext('en')),
+    ('pt-BR', gettext('pt-BR')),
 )
 
 CMS_LANGUAGES = {
     ## Customize this
     1: [
         {
-            'code': 'en',
-            'name': gettext('en'),
+            'code': 'pt-BR',
+            'name': gettext('pt-BR'),
             'redirect_on_fallback': True,
             'public': True,
             'hide_untranslated': False,
