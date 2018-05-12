@@ -1,6 +1,6 @@
-# Repo for {{cookiecutter.project_name}} website
+# {{cookiecutter.project_name}}
 
-## Local development
+## Ambiente de desenvolvimento
 
 ```
 git clone https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_slug}}
@@ -8,73 +8,62 @@ cd {{cookiecutter.project_slug}}
 docker-compose -f docker-compose-dev.yml build
 docker-compose -f docker-compose-dev.yml up (-d)
 ```
-
-If starting from the scratch run following commands:
+Se for partir do zero, execute os seguintes comandos:
 ```
 docker-compose -f docker-compose-dev.yml exec web python manage.py createsuperuser
 ```
 
-Alternatively, one can restore from previous run or from different machine:
+Como alternativa, pode-se restaurar a partir da execução anterior ou de uma máquina diferente:
 ```
 docker-compose -f docker-compose-dev.yml exec db list-backups
 docker-compose -f docker-compose-dev.yml exec db restore <backup-timestamp>
 ```
 
-For the local development a internal django server is used (ie. runserver command)
-and the port 8000 is exposed to the host. Local web directory is mapped to the
-container and the local changes will be reflected in the running container thus
-greatly facilitating the development process.
+Para o desenvolvimento local é utilizado um servidor interno do django (leia comando runserver) e a porta 8000 é exposta ao host. O diretório da web local é mapeado para o
+container e as mudanças locais serão refletidas no container, facilitando muito o processo de desenvolvimento.
 
-## Production run
+## Ambiente de Produção
 
-The production environment is similar to the local but requires creating .env file
-based based on the .env.example and usage of the `docker-compose-prod.yml` file
-wherever the `docker-compose-dev.yml` is used.
+O ambiente de produção é semelhante ao local, mas requer a criação do arquivo .env
+baseado no exemplo .env.dev e uso do arquivo `docker-compose-prod.yml`
+onde é usado o `docker-compose-dev.yml`.
 
-
-For the production run a gunicorn server is used to serve Django
-and the port 8000 is exposed to other services. The Nginx server
-is used as a proxy for Django and to serve static and media files.
+Para a produção, um servidor gunicorn é usado para servir o Django
+e a porta 8000 está exposta a outros serviços. O servidor Nginx
+é usado como um proxy para o Django e para servir arquivos estáticos e de mídia.
 
 ### IMPORTANT
 
-Do not forget to set properly environment. Especially ALLOWED_HOSTS.
+Não se esqueça de definir adequadamente o ambiente. Especialmente ALLOWED_HOSTS.
 
-There is a know bug in Django CMS causing a failure to load / address.
-If you experience 404 accessing the website (eg. http://localhost)
-turn on DEBUG=True for an initialization or go directly to /admin
-and create first Page manually in the DJANGO CMS -> Pages section.
-
+Existe um bug conhecido no Django CMS causando uma falha no carregamento / endereço.
+Se você tiver 404 acessando o site (por exemplo, http://localhost) vá diretamente para /admin e crie a primeira página manualmente na seção DJANGO CMS -> Pages.
 
 ## Backups
 
-In order to prepare backup run following command:
+Para preparar o backup, execute o seguinte comando:
 ```
 docker-compose -f docker-compose-dev.yml exec db backup
 ```
 
-In order to list all backups run following command:
+Para listar todos os backups, execute o seguinte comando:
 ```
 docker-compose -f docker-compose-dev.yml exec db list-backups
 ```
 
-In order to restore choosen backup run following command:
+Para restaurar o backup escolhido, execute o seguinte comando:
 ```
 docker-compose -f docker-compose-dev.yml exec db restore <backup-timestamp>
 ```
 
-Backup files are located in `/backups` directory. If order to transfer
-DB to a different machine copy choosen backup (sql and media file) to
-local host and transfer them to /backup directory of choosen machine
-running {{cookiecutter.project_name}} website DB container. To copy the files from container
-to local machine run:
+Os arquivos de backup estão localizados no diretório `/backups`. Utilize os comandos abaixo para copiar os arquivos do contêiner para a máquina local:
 
 ```
 sudo docker cp container_id:/backups/<sql_backup> ./
 sudo docker cp container_id:/backups/<media_backup> ./
 ```
 
-In order to copy files from the host to choosen machine's container do:
+Para copiar arquivos do máquina para o container, faça:
 ```
 sudo docker cp <sql_backup> container_id:/backups/
 sudo docker cp <media_backup> container_id:/backups/
@@ -82,13 +71,13 @@ sudo docker cp <media_backup> container_id:/backups/
 
 ## Logs
 
-The logs for nginx service can be found in `/var/log/nginx/error_{{cookiecutter.project_slug}}.log`
-and `/var/log/nginx/access_{{cookiecutter.project_slug}}.log`.
+Os logs do nginx podem ser encontrados em `/var/log/nginx/error_{{cookiecutter.project_slug}}.log`
+e `/var/log/nginx/access_{{cookiecutter.project_slug}}.log`.
 
-The logs for web servece are in `/var/log/{{cookiecutter.project_slug}}/access.log`,
-`/var/log/{{cookiecutter.project_slug}}/error.log` and `/var/log/{{cookiecutter.project_slug}}/django.log`.
+Os logs do serviço da web estão em `/var/log/{{cookiecutter.project_slug}}/access.log`,
+`/var/log/{{cookiecutter.project_slug}}/error.log` e `/var/log/{{cookiecutter.project_slug}}/django.log`.
 
-One can see them by executing:
+Pode-se vê-los executando:
 ```
 docker-compose -f docker-compose-dev.yml exec <service> tail [-F] <path to log>
 ```

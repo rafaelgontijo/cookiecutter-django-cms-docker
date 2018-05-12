@@ -1,29 +1,28 @@
-Cookiecutter Django CMS with Docker support
+Cookiecutter Django CMS com suporte a Docker
 ===========================================
 
-This cookiecutter provides a production ready Django CMS template
-using Docker. 
+Este cookiecutter fornece um modelo pronto para produção do Django CMS
+usando o Docker.
 
-Features
+Características
 ---------
 
-* For Django 1.9
-* Twitter Bootstrap_ v3
-* Docker support by docker-compose_ for development and production
-* Easy backup of DB and Media files
+* For Django 1.11
+* Twitter Bootstrap v4
+* Docker support by docker-compose for development and production
+* Backup fácil de arquivos de banco de dados e mídia
 
-Usage
+Uso
 -----
 
-Install cookiecutter::
+Instale o cookiecutter::
 
     $ pip install cookiecutter>=1.6.0
 
-Run cookiecutter against repo::
+Execute cookiecutter passando o repositório::
 
-    $ cookiecutter https://github.com/guma44/cookiecutter-django-cms-docker
+    $ cookiecutter https://github.com/rafaelgontijo/cookiecutter-django-cms-docker
 
-Provide the values that will be promped and the project will be created for you.
+Forneça os valores que serão pedidos e o projeto será criado para você.
 
-See the generated README.md file in the project directory for the details how to run
-and set up the CMS.
+Veja o arquivo README.md gerado no diretório do projeto para obter detalhes sobre como executar e configurar o CMS.
