@@ -9,7 +9,7 @@ Características
 
 * For Django 1.11
 * Twitter Bootstrap v4
-* Docker support by docker-compose for development and production
+* Suporte a Docker com docker-compose para desenvolvimento e produção
 * Backup fácil de arquivos de banco de dados e mídia
 
 Uso
