@@ -215,6 +215,8 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters'
 )
 
+META_SITE_PROTOCOL = os.environ.get('PROTOCOL', 'http')
+META_SITE_DOMAIN = os.environ.get('DOMAIN', 'localhost')
 
 LOGGING = {
     'version': 1,
