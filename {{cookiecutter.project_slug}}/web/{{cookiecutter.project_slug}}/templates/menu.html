@@ -9,7 +9,9 @@
                 {{ child.get_menu_title }} <span class="caret"></span>
             </a>
             <div class="dropdown-menu">
-                {% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
+                {% for c in child.children %}
+                <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.get_menu_title }}</a>
+                {% endfor %}
             </div>
         {% else %}
             <a class="nav-link" href="{{ child.get_absolute_url }}"><span>{{ child.get_menu_title }}</span></a>
