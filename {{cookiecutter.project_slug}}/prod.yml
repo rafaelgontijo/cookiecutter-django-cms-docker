@@ -10,11 +10,13 @@ services:
       - "8000"
     links:
       - db:db
+      - redis:redis
     env_file: .env
     volumes:
       - web_public_prod:/public:rw
     depends_on:
       - db
+      - redis
     command: /run_server.sh gunicorn
 
   nginx:
@@ -43,6 +45,9 @@ services:
     # Expose ports without publishing them
     expose:
       - "5432"
+
+  redis:
+    image: redis:3.2
 
 volumes:
   db_data_prod:

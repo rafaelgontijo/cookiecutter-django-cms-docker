@@ -5,18 +5,18 @@
 ```
 git clone https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_slug}}
 cd {{cookiecutter.project_slug}}
-docker-compose -f docker-compose-dev.yml build
-docker-compose -f docker-compose-dev.yml up (-d)
+docker-compose -f dev.yml build
+docker-compose -f dev.yml up (-d)
 ```
 Se for partir do zero, execute os seguintes comandos:
 ```
-docker-compose -f docker-compose-dev.yml exec web python manage.py createsuperuser
+docker-compose -f dev.yml exec web python manage.py createsuperuser
 ```
 
 Como alternativa, pode-se restaurar a partir da execução anterior ou de uma máquina diferente:
 ```
-docker-compose -f docker-compose-dev.yml exec db list-backups
-docker-compose -f docker-compose-dev.yml exec db restore <backup-timestamp>
+docker-compose -f dev.yml exec db list-backups
+docker-compose -f dev.yml exec db restore <backup-timestamp>
 ```
 
 Para o desenvolvimento local é utilizado um servidor interno do django (leia comando runserver) e a porta 8000 é exposta ao host. O diretório da web local é mapeado para o
@@ -25,8 +25,8 @@ container e as mudanças locais serão refletidas no container, facilitando muit
 ## Ambiente de Produção
 
 O ambiente de produção é semelhante ao local, mas requer a criação do arquivo .env
-baseado no exemplo .env.dev e uso do arquivo `docker-compose-prod.yml`
-onde é usado o `docker-compose-dev.yml`.
+baseado no exemplo .env.dev e uso do arquivo `prod.yml`
+onde é usado o `dev.yml`.
 
 Para a produção, um servidor gunicorn é usado para servir o Django
 e a porta 8000 está exposta a outros serviços. O servidor Nginx
@@ -43,17 +43,17 @@ Se você tiver 404 acessando o site (por exemplo, http://localhost) vá diretame
 
 Para preparar o backup, execute o seguinte comando:
 ```
-docker-compose -f docker-compose-dev.yml exec db backup
+docker-compose -f dev.yml exec db backup
 ```
 
 Para listar todos os backups, execute o seguinte comando:
 ```
-docker-compose -f docker-compose-dev.yml exec db list-backups
+docker-compose -f dev.yml exec db list-backups
 ```
 
 Para restaurar o backup escolhido, execute o seguinte comando:
 ```
-docker-compose -f docker-compose-dev.yml exec db restore <backup-timestamp>
+docker-compose -f dev.yml exec db restore <backup-timestamp>
 ```
 
 Os arquivos de backup estão localizados no diretório `/backups`. Utilize os comandos abaixo para copiar os arquivos do contêiner para a máquina local:
@@ -79,5 +79,5 @@ Os logs do serviço da web estão em `/var/log/{{cookiecutter.project_slug}}/acc
 
 Pode-se vê-los executando:
 ```
-docker-compose -f docker-compose-dev.yml exec <service> tail [-F] <path to log>
+docker-compose -f dev.yml exec <service> tail [-F] <path to log>
 ```

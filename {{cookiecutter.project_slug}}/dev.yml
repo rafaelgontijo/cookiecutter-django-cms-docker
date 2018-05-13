@@ -9,12 +9,14 @@ services:
       - "8000:8000"
     links:
       - db:db
+      - redis:redis
     env_file: .env.dev
     volumes:
       - ./web:/usr/src/app
       - web_public_dev:/public:rw
     depends_on:
       - db
+      - redis
     command: /run_server.sh local
 
   db:
@@ -28,6 +30,9 @@ services:
     # Expose ports without publishing them
     expose:
       - "5432"
+
+  redis:
+    image: redis:3.2
 
 volumes:
   db_data_dev:
