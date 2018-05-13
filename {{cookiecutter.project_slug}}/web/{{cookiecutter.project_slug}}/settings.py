@@ -204,6 +204,23 @@ else:
         }
     }
 
+if os.environ.get('USE_CACHE', 'False') == 'True':
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': os.environ.get('REDIS_URL', 'redis://redis:6379/0'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'IGNORE_EXCEPTIONS': True,
+                "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+            }
+        }
+    }
+
+    SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+    SESSION_CACHE_ALIAS = "default"
+
 MIGRATION_MODULES = {
 
 }
