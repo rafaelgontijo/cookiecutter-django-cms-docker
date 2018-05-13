@@ -215,8 +215,11 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters'
 )
 
-META_SITE_PROTOCOL = os.environ.get('PROTOCOL', 'http')
-META_SITE_DOMAIN = os.environ.get('DOMAIN', 'localhost')
+META_SITE_PROTOCOL = os.environ.get('META_PROTOCOL', 'http')
+META_SITE_DOMAIN = os.environ.get('META_DOMAIN', 'localhost')
+META_USE_OG_PROPERTIES = True if os.environ.get('META_USE_OG', 'False') == 'True' else False
+META_USE_TWITTER_PROPERTIES = True if os.environ.get('META_USE_TWITTER', 'False') == 'True' else False
+META_USE_GOOGLEPLUS_PROPERTIES = True if os.environ.get('META_USE_GOOGLEPLUS', 'False') == 'True' else False
 
 LOGGING = {
     'version': 1,
