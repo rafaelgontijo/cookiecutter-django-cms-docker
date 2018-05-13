@@ -10,7 +10,7 @@
             </a>
             <div class="dropdown-menu">
                 {% for c in child.children %}
-                <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.get_menu_title }}</a>
+                <a class="dropdown-item{% if c.selected %} active{% endif %}" href="{{ c.get_absolute_url }}">{{ c.get_menu_title }}</a>
                 {% endfor %}
             </div>
         {% else %}
