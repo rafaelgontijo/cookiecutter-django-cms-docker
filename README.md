@@ -7,7 +7,8 @@ usando o Docker.
 Características
 ---------
 
-* For Django 1.11
+* Django 1.11
+* Django CMS 3.5
 * Twitter Bootstrap v4
 * Suporte a Docker com docker-compose para desenvolvimento e produção
 * Backup fácil de arquivos de banco de dados e mídia
