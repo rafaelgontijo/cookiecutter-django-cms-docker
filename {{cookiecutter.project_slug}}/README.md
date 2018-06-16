@@ -32,7 +32,7 @@ Para a produção, um servidor gunicorn é usado para servir o Django
 e a porta 8000 está exposta a outros serviços. O servidor Nginx
 é usado como um proxy para o Django e para servir arquivos estáticos e de mídia.
 
-### IMPORTANT
+### Importante
 
 Não se esqueça de definir adequadamente o ambiente. Especialmente ALLOWED_HOSTS.
 
@@ -63,7 +63,7 @@ sudo docker cp container_id:/backups/<sql_backup> ./
 sudo docker cp container_id:/backups/<media_backup> ./
 ```
 
-Para copiar arquivos do máquina para o container, faça:
+Para copiar arquivos da máquina para o container, faça:
 ```
 sudo docker cp <sql_backup> container_id:/backups/
 sudo docker cp <media_backup> container_id:/backups/
